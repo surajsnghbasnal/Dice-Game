@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import HomePage from "./Components/homePage";
+import GamePlay from "./Components/GamePlay.jsx";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    location.pathname === "/" && navigate("/dice-game");
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/dice-game" element={<HomePage />} />
+        <Route path="/start" element={<GamePlay />} />
+      </Routes>
+    </>
   );
-}
+};
 
 export default App;
